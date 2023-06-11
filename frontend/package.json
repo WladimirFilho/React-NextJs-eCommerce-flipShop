@@ -2,6 +2,7 @@
   "name": "e_commerce_web_page",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://http://localhost:3001/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +15,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "framer-motion": "^10.12.16",
     "next": "13.4.4",
     "postcss": "8.4.24",

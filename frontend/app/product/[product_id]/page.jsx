@@ -1,15 +1,29 @@
 "use client";
 
 import { Rating } from "@/Components/Rating";
-import products from "@/products";
+import { fetchProduct } from "@/api/service";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ProductScreen = ({ params }) => {
   const productId = params.product_id;
-  const productChoice = products.find((p) => p._id === productId);
   const router = useRouter();
+
+  const [productChoice, setProductChoice] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchProduct(productId);
+      setProductChoice(data);
+    })();
+  }, []);
+
+  if (!productChoice) {
+    return (
+      <p className="main-layout flex justify-center items-center">Loading...</p>
+    );
+  }
 
   return (
     <div className="main-layout ">
@@ -24,22 +38,23 @@ const ProductScreen = ({ params }) => {
       {/* Image section */}
       <div className="flex gap-8 items-start">
         <Image
+          alt="product"
           className="w-full h-[700px] object-cover"
           width={700}
           height={700}
-          src={productChoice.image}
+          src={productChoice?.image}
         />
 
         {/* product cart */}
         <div className="flex flex-col gap-8 items-start w-[300px] rounded-md border-[1px] border-black p-10">
           <div className="flex pb-2 w-full justify-between border-b-[1px] border-black">
             <p>Total Prince:</p>
-            <p>{productChoice.price}</p>
+            <p>{productChoice?.price}</p>
           </div>
           <div className="flex pb-2 border-b-[1px] border-black w-full justify-between">
             <p>Status:</p>
             <p>
-              {productChoice.countInStock > 0 ? "In Stock" : "Out of Stock"}
+              {productChoice?.countInStock > 0 ? "In Stock" : "Out of Stock"}
             </p>
           </div>
           <button className="text-zinc-200 text-lg font-semibold rounded-md bg-zinc-800 px-8 py-4">
@@ -50,22 +65,26 @@ const ProductScreen = ({ params }) => {
 
       {/* product description */}
       <div className="flex flex-col">
-        <h1 className=" text-3xl mt-6 font-bold">{productChoice.name}</h1>
+        <h1 className=" text-3xl mt-6 font-bold">{productChoice?.name}</h1>
         <Rating
-          value={productChoice.rating}
-          text={`${productChoice.numReviews}
+          value={productChoice?.rating}
+          text={`${productChoice?.numReviews}
           reviews`}
         />
 
         <p className="mt-6 text-xl">
           Price:{" "}
           <span className="font-bold ml-4 text-3xl">
-            {productChoice.price.toLocaleString("pt-BR", {
+            {productChoice?.price.toLocaleString("pt-BR", {
               style: "currency",
               currency: "AUD",
             })}
           </span>
         </p>
+
+        <div>
+          <p className="mt-8 w-1/2 text-lg">{productChoice.description}</p>
+        </div>
       </div>
     </div>
   );
