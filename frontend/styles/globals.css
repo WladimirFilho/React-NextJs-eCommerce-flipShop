@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-layout{
+    @apply p-4 max-w-[1280px] mx-auto min-h-[calc(100vh-142px)]
+}
