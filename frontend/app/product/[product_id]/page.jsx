@@ -11,11 +11,13 @@ const ProductScreen = ({ params }) => {
   const router = useRouter();
 
   const [productChoice, setProductChoice] = useState();
+  console.log(productChoice);
 
   useEffect(() => {
     (async () => {
       const data = await fetchProduct(productId);
       setProductChoice(data);
+      console.log(data);
     })();
   }, []);
 

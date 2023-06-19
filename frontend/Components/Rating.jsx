@@ -2,6 +2,8 @@ import React from "react";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 export const Rating = ({ value, text }) => {
+  console.log(value);
+
   return (
     <div className="flex gap-1 items-center text-yellow-400">
       <span>
