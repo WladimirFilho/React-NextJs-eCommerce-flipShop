@@ -1,0 +1,36 @@
+.loader{
+    @apply inline-block relative h-20 w-20;
+}
+
+.loader div{
+
+    @apply inline-block absolute left-2 w-4 bg-black;
+    animation: loader 1.2s cubic-bezier(0,0.5,0.5,1) infinite;
+}
+
+.loader div:nth-child(1){
+    @apply left-2;
+    animation-delay: -0.24s;
+}
+
+.loader div:nth-child(2){
+    @apply left-8;
+    animation-delay: -0.12s;
+}
+
+.loader div:nth-child(3){
+    @apply left-14;
+    animation-delay: 0s;
+}
+
+@keyframes loader {
+    0%{
+        top: 8px;
+        height: 64px;
+    }
+    50%,100%{
+        top: 24px;
+        height: 32px;
+    }
+    
+}

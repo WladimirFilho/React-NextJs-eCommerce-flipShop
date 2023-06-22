@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { Nunito_Sans } from "next/font/google";
 import Header from "../Components/Header";
 import Footer from "@/Components/Footer";
+import { Providers } from "@/redux/provider";
 
 const nunito = Nunito_Sans({ subsets: ["latin"] });
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={` min-h-screen ${nunito.className}`}>
-        <Header></Header>
-        {children}
-        <Footer />
+        <Providers>
+          <Header></Header>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
